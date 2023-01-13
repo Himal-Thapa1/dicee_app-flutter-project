@@ -26,40 +26,58 @@ class DicePage extends StatefulWidget {
 class _DicePageState extends State<DicePage> {
   int leftdicenumber=1;
   int rightdicenumber=1;
+  int sum=0;
   void changedicenumber(){
     leftdicenumber=Random().nextInt(6)+1;
     rightdicenumber=Random().nextInt(6)+1;
+    sum=leftdicenumber+rightdicenumber;
   }
   @override
   Widget build(BuildContext context) {
     
     return Center(
-      child: Row(
+      child: Column(
         children: [
-          Expanded(child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextButton (
-              onPressed: (){
-                setState(() {
-                  changedicenumber();
-                });
-                print('The leftdicenumber is now $leftdicenumber');
-              },
-              child: Image.asset('images/dice$leftdicenumber.png'),),
+          Expanded(
+            flex: 3,
+            child: Row(
+              children: [
+                Expanded(child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextButton (
+                    onPressed: (){
+                      setState(() {
+                        changedicenumber();
+                      });
+                      print('The leftdicenumber is now $leftdicenumber');
+                    },
+                    child: Image.asset('images/dice$leftdicenumber.png'),),
+                ),
+                ),
+                Expanded(child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextButton (
+                    onPressed: (){
+                      setState(() {
+                        changedicenumber();
+                      });
+                      print('The rightdicenumber is now $rightdicenumber');
+                    },
+                    child: Image.asset('images/dice$rightdicenumber.png')),
+                ),
+                ),
+              ],
+            ),
           ),
-          ),
-          Expanded(child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextButton (
-              onPressed: (){
-                setState(() {
-                  changedicenumber();
-                });
-                print('The rightdicenumber is now $rightdicenumber');
-              },
-              child: Image.asset('images/dice$rightdicenumber.png')),
-          ),
-          ),
+          Expanded(
+            flex: 1,
+            child: Text(
+              'The sum is $sum',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+              ),
+              ),),
         ],
       ),
     );
